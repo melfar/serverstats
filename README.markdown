@@ -1,4 +1,4 @@
-# ServerStats — the Server Status dashboard widget brought to Linux
+# ServerStats — the Server Status dashboard widget greets Linux
 
 Server Status is a dashboard widget found in every Mac OS X Leopard installation
 that allows you to remotely connect to a server and see CPU, network and disk usage
