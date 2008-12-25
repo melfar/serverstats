@@ -1,4 +1,5 @@
 # gem install rack thin json
+# start with: thin start -R agent.ru -p 8818
 
 use Rack::ShowExceptions
 use Rack::CommonLogger

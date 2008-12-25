@@ -1,3 +1,0 @@
-#!/bin/sh
-
-thin start -R agent.ru -p 8018
