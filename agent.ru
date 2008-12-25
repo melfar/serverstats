@@ -13,7 +13,10 @@ module Rack
       req = Request.new(env)
 
       Response.new.finish do |res|
-        if req.params['q']
+        if req.fullpath =~ %r{/ping}
+          res.write 'pong'
+        
+        elsif req.params['q']
           q = JSON.parse(req.params['q'])
           #puts q.inspect
         
@@ -25,7 +28,7 @@ module Rack
           end.compact
         
           res.write envelope(responses*',')
-          puts envelope(responses*',')
+          #puts envelope(responses*',')
         end
       end
     end
@@ -119,7 +122,7 @@ module Rack
       ENV['LANG'] = 'C'
       raw = `sar -n DEV 5 2`
       multiplier = if raw['txbyt']
-        1
+        8
       elsif raw['txkB']
         1000
       else
@@ -129,7 +132,7 @@ module Rack
       @traffic = raw.select do |line| 
         line =~ /verage/ && line !~ /tx/ && line =~ /eth0/
       end.map do |line|
-        line.strip.split(/\s+/)[4,2].map{|b| b.to_i*8 * multiplier }
+        line.strip.split(/\s+/)[4,2].map{|b| b.to_f * multiplier }
       end.first
     end
     
