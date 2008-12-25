@@ -1,0 +1,1816 @@
+Common subdirectories: orig/English.lproj and dest/English.lproj
+Common subdirectories: orig/French.lproj and dest/French.lproj
+Common subdirectories: orig/German.lproj and dest/German.lproj
+Common subdirectories: orig/Images and dest/Images
+diff -c orig/Info.plist dest/Info.plist
+*** orig/Info.plist	2007-04-17 04:36:54.000000000 +0400
+--- dest/Info.plist	2008-12-25 14:06:58.000000000 +0300
+***************
+*** 1,9 ****
+  <?xml version="1.0" encoding="UTF-8"?>
+! <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+  <plist version="1.0">
+  <dict>
+  	<key>AllowInternetPlugins</key>
+  	<true/>
+  	<key>AllowSystem</key>
+  	<true/>
+  	<key>CFBundleDevelopmentRegion</key>
+--- 1,11 ----
+  <?xml version="1.0" encoding="UTF-8"?>
+! <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+  <plist version="1.0">
+  <dict>
+  	<key>AllowInternetPlugins</key>
+  	<true/>
++ 	<key>AllowNetworkAccess</key>
++ 	<true/>
+  	<key>AllowSystem</key>
+  	<true/>
+  	<key>CFBundleDevelopmentRegion</key>
+***************
+*** 11,34 ****
+  	<key>CFBundleDisplayName</key>
+  	<string>Server Status</string>
+  	<key>CFBundleIdentifier</key>
+! 	<string>com.apple.widget.ServerStatus</string>
+  	<key>CFBundleName</key>
+  	<string>Server Status</string>
+  	<key>CFBundleShortVersionString</key>
+! 	<string>1.0</string>
+  	<key>CFBundleVersion</key>
+! 	<string>1.0</string>
+  	<key>CloseBoxInsetX</key>
+  	<integer>6</integer>
+  	<key>CloseBoxInsetY</key>
+  	<integer>6</integer>
+  	<key>Height</key>
+! 	<integer>345</integer>
+  	<key>MainHTML</key>
+  	<string>ServerStatus.html</string>
+  	<key>Plugin</key>
+  	<string>XSAdminSessionPlugIn.widgetplugin</string>
+  	<key>Width</key>
+! 	<integer>250</integer>
+  </dict>
+  </plist>
+--- 13,36 ----
+  	<key>CFBundleDisplayName</key>
+  	<string>Server Status</string>
+  	<key>CFBundleIdentifier</key>
+! 	<string>com.wordpress.melfar.widget.ServerStats</string>
+  	<key>CFBundleName</key>
+  	<string>Server Status</string>
+  	<key>CFBundleShortVersionString</key>
+! 	<string>0.1</string>
+  	<key>CFBundleVersion</key>
+! 	<string>0.1</string>
+  	<key>CloseBoxInsetX</key>
+  	<integer>6</integer>
+  	<key>CloseBoxInsetY</key>
+  	<integer>6</integer>
+  	<key>Height</key>
+! 	<integer>177</integer>
+  	<key>MainHTML</key>
+  	<string>ServerStatus.html</string>
+  	<key>Plugin</key>
+  	<string>XSAdminSessionPlugIn.widgetplugin</string>
+  	<key>Width</key>
+! 	<integer>254</integer>
+  </dict>
+  </plist>
+Common subdirectories: orig/Japanese.lproj and dest/Japanese.lproj
+Only in dest/: ServerStatsAgent.js
+diff -c orig/ServerStatus.css dest/ServerStatus.css
+*** orig/ServerStatus.css	2007-06-08 04:21:18.000000000 +0400
+--- dest/ServerStatus.css	2008-12-25 14:06:58.000000000 +0300
+***************
+*** 1,281 ****
+  body {
+! 	font-family:'Lucida Grande';
+! 	position: absolute;
+! 	width: 240px;
+! 	height: 340px;
+! 	top:  0px;
+! 	left:  0px;
+! 	position: fixed;
+! 	margin: 0;
+  }
+  
+  #background {
+! 	position: absolute;
+! 	top:  0px;
+! 	left:  0px;
+! 	width: 100%;
+! 	height: 100%;
+  }
+  
+  /* @group Front */
+- 
+  #front {
+! 	position: absolute;
+! 	top: 6px;
+! 	left: 10px;
+! 	bottom: 14px;
+! 	right: 10px;
+! 	width: 220px;
+! 	height: 320px;
+! 	border: 1px solid black;
+! 	-webkit-border-radius: 10px;
+! 	background: #343432 url(Images/backgroundGradient.png) no-repeat;
+! 	color: white;
+! 	clip: auto;
+  }
+  
+  /* @group Titlebar */
+- 
+  #title {
+! 	position: absolute;
+! 	text-align: center;
+! 	top:  0px;
+! 	left: 0px;
+! 	right: 0px;
+! 	height:  24px;
+! 	border-bottom: 1px solid #191919;
+! 	padding-top: 5px;
+! 	font-size: 14px;
+! 	text-shadow: 0px -1px 0px #000;
+  }
+  
+  #resizeWidget {
+! 	width: 19px;
+! 	height: 16px;
+! 	position: absolute;
+! 	top: 7px;
+! 	left: 8px;
+! 	background-image: url(Images/windowSizeDown.png);
+! 	display: none;
+  }
+  
+  #resizeWidget:hover {
+! 	background-image: url(Images/windowSizeDown.png);	
+  }
+  
+  #flip {
+! 	position: absolute;
+! 	top: 7px;
+! 	right: 20px;
+  }
+  
+  /* @end */
+- 
+  div.contentArea {
+! 	display: none;
+! 	position: absolute;
+! 	width: 100%;
+! 	top: 30px;
+! 	bottom: 0px;
+  }
+  
+  /* @group Graph & Services */
+- 
+  #graphAndServicesContentArea {
+! 	display: block;
+  }
+  
+  #graphArea {
+! 	position: absolute;
+! 	left: 0px;
+! 	right: 0px;
+! 	top: 0px;
+! 	height: 75px;
+! 	border-top: 1px solid #4c4c4c;
+  }
+  
+  #graphButtonArea {
+! 	height: 31px;
+! 	top:  77px;
+! 	left: 1px;
+! 	right: 1px;
+! 	position: absolute;
+! 	border-bottom: 1px solid #191919;
+  }
+  
+  #servicesArea {
+! 	position: absolute;
+! 	left: 1px;
+! 	right: 1px;
+! 	bottom: 0px;
+! 	height: 180px;
+! 	display: block;
+! 	border-top: 1px solid #4c4c4c;
+  }
+  
+  /* @group Graph Area */
+- 
+  #graphFadeInArea {
+! 	opacity: 0;
+! 	z-index: 10;
+! 	position:  absolute;
+! 	top: 0px;
+! 	bottom: 0px;
+! 	left: 0px;
+! 	right: 0px;
+! 	font-size: 10px;
+  }
+  
+  div.graphTopLabel {
+! 	position: absolute;
+! 	top: 0px;
+! 	left: 10%;
+! 	width: 80%;
+! 	height: 25%;
+! 	text-align: center;
+! 	font-size: 10px;
+! 	padding-top: 3px;
+  }
+  
+  div.graphYAxisLabel {
+! 	position: absolute;
+! 	right: 0px;
+! 	width: 20px;
+! 	font-size: 9px;
+! 	text-align: center;
+! 	margin-right: 1px;
+  }
+  
+  canvas.graphCanvas {
+! 	display: block;
+! 	background: rgba(0,0,0,0.02);
+! 	position: absolute;
+! 	left: 21px;
+! 	width: 176px;
+! 	height: 58px;
+! 	bottom: 0px;
+  }
+  
+  /* @group CPU Graph */
+- 
+  #cpuGraphArea {
+! 	display: block;
+  }
+  
+  #cpuGraphCanvas {
+! 	display: block;
+  }
+  
+  #cpuGraph0Label {
+! 	bottom: 0%;
+  }
+  
+  #cpuGraph50Label {
+! 	bottom: 30%;	
+  }
+  
+  #cpuGraph100Label {
+! 	top: 26%;		
+  }
+  
+  
+  /* @end */
+  
+  /* @group Network Graph */
+- 
+  #networkGraphArea {
+! 	display: none;
+  }
+  
+  #networkGraphCanvas {
+- 	
+  }
+  
+  #networkGraphInLabel {
+! 	top: 35%;
+! 	text-align: center;
+  }
+  
+  #networkGraphOutLabel {
+! 	top: 74%;
+! 	text-align: center;
+  }
+  
+  /* @end */
+  
+  /* @group Disk Graph */
+- 
+  #diskGraphArea {
+! 	display: none;
+  }
+  
+  #diskGraphCanvas {
+! 	background: none;
+  }
+  
+  #diskGraphTopLabel {
+! 	overflow: hidden;
+! 	white-space: nowrap;
+! 	text-overflow: ellipsis;
+! 	-webkit-text-overflow: ellipsis;
+! 	margin-right: 0;
+! 	margin-left: 0;
+! 	height: 15px;
+  }
+  
+  #diskGraphShowOnMouseOver {
+! 	opacity: 0;
+  }
+  
+  #diskGraphAmountUsedLabel {
+! 	font-size: 10px;
+! 	text-align: center;
+! 	position: absolute;
+! 	bottom: 0px;
+! 	width: 50%;
+! 	right: 5px;
+  }
+  
+  #diskGraphAmountFreeLabel {
+! 	font-size: 10px;
+! 	text-align: center;
+! 	position: absolute;
+! 	bottom: 0px;
+! 	width: 50%;
+! 	left: 5px;
+  }
+  
+  /* @end */
+  
+  /* @group Timescale */
+- 
+  div.graphTimeScale {
+! 	text-align: center;
+! 	position:  absolute;
+! 	top: 0px;
+! 	bottom: 0px;
+! 	left: 0px;
+! 	right: 0px;
+! 	padding-top: 2px;
+  }
+  
+! #graphTimeScale1H {}
+! #graphTimeScale1D {}
+! #graphTimeScale1W {}
+  
+  span.regularTimeScale {
+! 	padding-left: 3px;
+! 	padding-right: 3px;
+! 	text-shadow: 0px -1px 1px #000;
+  }
+  
+  span.selectedTimeScale {
+! 	padding-left: 3px;
+! 	padding-right: 3px;
+! 	background-color: #d8d8d8;
+! 	color: #3f3f3f;
+! 	-webkit-border-radius: 3px;
+! 	font-weight: bold;
+  }
+  
+  /* @end */
+--- 1,307 ----
+  body {
+!     font-family: 'Lucida Grande';
+!     position: absolute;
+!     width: 240px;
+!     height: 160px;
+!     top: 0px;
+!     left: 0px;
+!     position: fixed;
+!     margin: 0px;
+  }
+  
+  #background {
+!     position: absolute;
+!     top: 0px;
+!     left: 0px;
+!     width: 100%;
+!     height: 100%;
+  }
+  
+  /* @group Front */
+  #front {
+!     position: absolute;
+!     top: 6px;
+!     left: 10px;
+!     bottom: 14px;
+!     right: 10px;
+!     width: 220px;
+!     height: 160px;
+!     border-width: 1px;
+!     border-style: solid;
+!     border-color: black;
+!     -webkit-border-top-right-radius: 10px 10px;
+!     -webkit-border-top-left-radius: 10px 10px;
+!     -webkit-border-bottom-left-radius: 10px 10px;
+!     -webkit-border-bottom-right-radius: 10px 10px;
+!     background-image: url(Images/backgroundGradient.png);
+!     background-repeat: no-repeat;
+!     background-attachment: initial;
+!     -khtml-background-clip: initial;
+!     -khtml-background-origin: initial;
+!     background-color: rgb(52, 52, 50);
+!     color: white;
+!     clip: auto;
+  }
+  
+  /* @group Titlebar */
+  #title {
+!     position: absolute;
+!     text-align: center;
+!     top: 0px;
+!     left: 0px;
+!     right: 0px;
+!     height: 24px;
+!     border-bottom-width: 1px;
+!     border-bottom-style: solid;
+!     border-bottom-color: rgb(25, 25, 25);
+!     padding-top: 5px;
+!     font-size: 14px;
+!     text-shadow: rgb(0, 0, 0) 0px -1px 0px;
+  }
+  
+  #resizeWidget {
+!     width: 19px;
+!     height: 16px;
+!     position: absolute;
+!     top: 7px;
+!     left: 8px;
+!     background-image: url(Images/windowSizeDown.png);
+!     display: none;
+  }
+  
+  #resizeWidget:hover {
+!     background-image: url(Images/windowSizeDown.png);
+  }
+  
+  #flip {
+!     position: absolute;
+!     top: 7px;
+!     right: 20px;
+  }
+  
+  /* @end */
+  div.contentArea {
+!     display: none;
+!     position: absolute;
+!     width: 100%;
+!     top: 30px;
+!     bottom: 0px;
+  }
+  
+  /* @group Graph & Services */
+  #graphAndServicesContentArea {
+!     display: block;
+  }
+  
+  #graphArea {
+!     position: absolute;
+!     left: 0px;
+!     right: 0px;
+!     top: 0px;
+!     height: 75px;
+!     border-top-width: 1px;
+!     border-top-style: solid;
+!     border-top-color: rgb(76, 76, 76);
+  }
+  
+  #graphButtonArea {
+!     height: 31px;
+!     top: 77px;
+!     left: 1px;
+!     right: 1px;
+!     position: absolute;
+!     border-bottom-width: 1px;
+!     border-bottom-style: solid;
+!     border-bottom-color: rgb(25, 25, 25);
+  }
+  
+  #servicesArea {
+!     position: absolute;
+!     left: 1px;
+!     right: 1px;
+!     bottom: 0px;
+!     height: 180px;
+!     display: block;
+!     border-top-width: 1px;
+!     border-top-style: solid;
+!     border-top-color: rgb(76, 76, 76);
+  }
+  
+  /* @group Graph Area */
+  #graphFadeInArea {
+!     opacity: 0;
+!     z-index: 10;
+!     position: absolute;
+!     top: 0px;
+!     bottom: 0px;
+!     left: 0px;
+!     right: 0px;
+!     font-size: 10px;
+  }
+  
+  div.graphTopLabel {
+!     position: absolute;
+!     top: 0px;
+!     left: 10%;
+!     width: 80%;
+!     height: 25%;
+!     text-align: center;
+!     font-size: 10px;
+!     padding-top: 3px;
+  }
+  
+  div.graphYAxisLabel {
+!     position: absolute;
+!     right: 0px;
+!     width: 20px;
+!     font-size: 9px;
+!     text-align: center;
+!     margin-right: 1px;
+  }
+  
+  canvas.graphCanvas {
+!     display: block;
+!     background-image: initial;
+!     background-repeat: initial;
+!     background-attachment: initial;
+!     -khtml-background-clip: initial;
+!     -khtml-background-origin: initial;
+!     background-color: rgba(0, 0, 0, 0.0156863);
+!     position: absolute;
+!     left: 21px;
+!     width: 176px;
+!     height: 58px;
+!     bottom: 0px;
+  }
+  
+  /* @group CPU Graph */
+  #cpuGraphArea {
+!     display: block;
+  }
+  
+  #cpuGraphCanvas {
+!     display: block;
+  }
+  
+  #cpuGraph0Label {
+!     bottom: 0%;
+  }
+  
+  #cpuGraph50Label {
+!     bottom: 30%;
+  }
+  
+  #cpuGraph100Label {
+!     top: 26%;
+  }
+  
+  
+  /* @end */
+  
+  /* @group Network Graph */
+  #networkGraphArea {
+!     display: none;
+  }
+  
+  #networkGraphCanvas {
+  }
+  
+  #networkGraphInLabel {
+!     top: 35%;
+!     text-align: center;
+  }
+  
+  #networkGraphOutLabel {
+!     top: 74%;
+!     text-align: center;
+  }
+  
+  /* @end */
+  
+  /* @group Disk Graph */
+  #diskGraphArea {
+!     display: none;
+  }
+  
+  #diskGraphCanvas {
+!     background-image: none;
+!     background-repeat: initial;
+!     background-attachment: initial;
+!     -khtml-background-clip: initial;
+!     -khtml-background-origin: initial;
+!     background-color: initial;
+  }
+  
+  #diskGraphTopLabel {
+!     overflow: hidden;
+!     white-space: nowrap;
+!     text-overflow: ellipsis;
+!     -webkit-text-overflow: ellipsis;
+!     margin-right: 0px;
+!     margin-left: 0px;
+!     height: 15px;
+  }
+  
+  #diskGraphShowOnMouseOver {
+!     opacity: 0;
+  }
+  
+  #diskGraphAmountUsedLabel {
+!     font-size: 10px;
+!     text-align: center;
+!     position: absolute;
+!     bottom: 0px;
+!     width: 50%;
+!     right: 5px;
+  }
+  
+  #diskGraphAmountFreeLabel {
+!     font-size: 10px;
+!     text-align: center;
+!     position: absolute;
+!     bottom: 0px;
+!     width: 50%;
+!     left: 5px;
+  }
+  
+  /* @end */
+  
+  /* @group Timescale */
+  div.graphTimeScale {
+!     text-align: center;
+!     position: absolute;
+!     top: 0px;
+!     bottom: 0px;
+!     left: 0px;
+!     right: 0px;
+!     padding-top: 2px;
+! }
+! 
+! #graphTimeScale1H {
+! }
+! 
+! #graphTimeScale1D {
+  }
+  
+! #graphTimeScale1W {
+! }
+  
+  span.regularTimeScale {
+!     padding-left: 3px;
+!     padding-right: 3px;
+!     text-shadow: rgb(0, 0, 0) 0px -1px 1px;
+  }
+  
+  span.selectedTimeScale {
+!     padding-left: 3px;
+!     padding-right: 3px;
+!     background-color: rgb(216, 216, 216);
+!     color: rgb(63, 63, 63);
+!     -webkit-border-top-right-radius: 3px 3px;
+!     -webkit-border-top-left-radius: 3px 3px;
+!     -webkit-border-bottom-left-radius: 3px 3px;
+!     -webkit-border-bottom-right-radius: 3px 3px;
+!     font-weight: bold;
+  }
+  
+  /* @end */
+***************
+*** 283,422 ****
+  /* @end * Services */
+  
+  /* @group Graph Buttons */
+- 
+- 
+  .graphButton {
+! 	width: 48px;
+! 	height: 29px;
+! 	z-index: 10;
+  }
+  
+  .graphButtonSelected {
+! 	width: 48px;
+! 	height: 29px;
+! 	z-index: 10;	/* so the bg image appears above hash marks */
+  }
+  
+- 
+  #graphCPUButton {
+! 	position: absolute;
+! 	top: 0px;
+! 	left: 39px;
+  }
+  
+  #graphNetworkButton {
+! 	position: absolute;
+! 	top: 0px;
+! 	left: 85px;
+! 	
+  }
+  
+  #graphDiskButton {
+! 	position: absolute;
+! 	top: 0px;
+! 	left: 129px;
+  }
+  
+  .graphButtonImage {
+! 	position: absolute;
+! 	width: 17px;
+! 	height: 15px;
+! 	top:  7px;
+! 	left:  17px;
+! 	z-index: 3;
+  }
+  
+  #cpuButtonImage {
+! 	background-image: url(Images/buttonCPU.png);
+! 	background-repeat: no-repeat;
+  }
+  
+  #networkButtonImage {
+! 	background: url(Images/buttonNetwork.png) no-repeat 0 3px;
+! 	z-index: 1000;
+  }
+  
+  #diskButtonImage {
+! 	background-image: url(Images/buttonDisk.png);
+! 	background-repeat: no-repeat;
+  }
+  
+- 
+  img.graphButtonBg {
+! 	position: absolute;
+! 	top: 1px;
+! 	display: none;
+  }
+  
+  .graphButtonSelected img.graphButtonBg {
+! 	display: block;
+  }
+  
+  img.graphButtonBg#cpuBg {
+  }
+  img.graphButtonBg#networkBg {
+  }
+  img.graphButtonBg#diskBg {
+  }
+  
+  .graphButton .graphButtonImage {
+! 	opacity: 0.6;
+  }
+  
+  .graphButtonSelected .graphButtonImage {
+! 	opacity: 1.0;	
+  }
+  
+  img.graphButtonsHashMark {
+! 	position: absolute;
+! 	top: 4px;
+! 	height: 22px;
+! 	width: 2px;
+! 	opacity: 0.66;
+! 	display: none;
+  }
+  
+  img.graphButtonsHashMark#hash1 {
+! 	left:  42px;
+  }
+  
+  img.graphButtonsHashMark#hash2 {
+! 	left:  88px;
+  }
+  
+  img.graphButtonsHashMark#hash3 {
+! 	left:  134px;
+  }
+  
+  img.graphButtonsHashMark#hash4 {
+! 	left:  180px;
+  }
+  
+  
+  /* @end */
+  
+  /* @group Services */
+- 
+  #services {
+! 	width: 100%;
+! 	height: 100%;
+! 	-apple-dashboard-region:dashboard-region(control rectangle);
+  }
+  
+  .servicesTable {
+! 	width: 100%;
+! 	height: 100%;
+! 	white-space: nowrap;
+! 	text-overflow: ellipsis;
+! 	-webkit-text-overflow: ellipsis;
+! 	overflow: hidden;
+  }
+  
+! .servicesTable tr{
+  }
+  
+  .servicesTable tr:hover {
+! 	background-color: rgba(0,0,0,0.15);
+  }
+  
+  .servicesTable td {
+--- 309,450 ----
+  /* @end * Services */
+  
+  /* @group Graph Buttons */
+  .graphButton {
+!     width: 48px;
+!     height: 29px;
+!     z-index: 10;
+  }
+  
+  .graphButtonSelected {
+!     width: 48px;
+!     height: 29px;
+!     z-index: 10;	/* so the bg image appears above hash marks */
+  }
+  
+  #graphCPUButton {
+!     position: absolute;
+!     top: 0px;
+!     left: 39px;
+  }
+  
+  #graphNetworkButton {
+!     position: absolute;
+!     top: 0px;
+!     left: 85px;
+  }
+  
+  #graphDiskButton {
+!     position: absolute;
+!     top: 0px;
+!     left: 129px;
+  }
+  
+  .graphButtonImage {
+!     position: absolute;
+!     width: 17px;
+!     height: 15px;
+!     top: 7px;
+!     left: 17px;
+!     z-index: 3;
+  }
+  
+  #cpuButtonImage {
+!     background-image: url(Images/buttonCPU.png);
+!     background-repeat: no-repeat;
+  }
+  
+  #networkButtonImage {
+!     background-image: url(Images/buttonNetwork.png);
+!     background-repeat: no-repeat;
+!     background-attachment: initial;
+!     -khtml-background-clip: initial;
+!     -khtml-background-origin: initial;
+!     background-color: initial;
+!     z-index: 1000;
+!     background-position: 0px 3px;
+  }
+  
+  #diskButtonImage {
+!     background-image: url(Images/buttonDisk.png);
+!     background-repeat: no-repeat;
+  }
+  
+  img.graphButtonBg {
+!     position: absolute;
+!     top: 1px;
+!     display: none;
+  }
+  
+  .graphButtonSelected img.graphButtonBg {
+!     display: block;
+  }
+  
+  img.graphButtonBg#cpuBg {
+  }
++ 
+  img.graphButtonBg#networkBg {
+  }
++ 
+  img.graphButtonBg#diskBg {
+  }
+  
+  .graphButton .graphButtonImage {
+!     opacity: 0.6;
+  }
+  
+  .graphButtonSelected .graphButtonImage {
+!     opacity: 1;
+  }
+  
+  img.graphButtonsHashMark {
+!     position: absolute;
+!     top: 4px;
+!     height: 22px;
+!     width: 2px;
+!     opacity: 0.66;
+!     display: none;
+  }
+  
+  img.graphButtonsHashMark#hash1 {
+!     left: 42px;
+  }
+  
+  img.graphButtonsHashMark#hash2 {
+!     left: 88px;
+  }
+  
+  img.graphButtonsHashMark#hash3 {
+!     left: 134px;
+  }
+  
+  img.graphButtonsHashMark#hash4 {
+!     left: 180px;
+  }
+  
+  
+  /* @end */
+  
+  /* @group Services */
+  #services {
+!     width: 100%;
+!     height: 100%;
+!     -apple-dashboard-region: dashboard-region(control rectangle);
+  }
+  
+  .servicesTable {
+!     width: 100%;
+!     height: 100%;
+!     white-space: nowrap;
+!     text-overflow: ellipsis;
+!     -webkit-text-overflow: ellipsis;
+!     overflow: hidden;
+  }
+  
+! .servicesTable tr {
+  }
+  
+  .servicesTable tr:hover {
+!     background-color: rgba(0, 0, 0, 0.14902);
+  }
+  
+  .servicesTable td {
+***************
+*** 424,494 ****
+  	   rendered and used for layout... otherwise the
+  	   view will jump about a bit when you mouse over the
+  	   first row (see tr + tr immediately below) */
+! 	border-top: 1px solid rgba(0,0,0,0);
+  }
+  
+  .servicesTable tr + tr td {
+  	/* slightly lighten the top of the row during normal drawing */
+! 	border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .servicesTable tr:hover td {
+  	/* slightly darken the top of the row when hovering */
+! 	border-top: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  .servicesTable td.gap {
+  	/* for the "gap" table columns, show no top border */
+! 	width: 5px;
+! 	border-top: 0;
+! 	padding: 0;
+  }
+  
+  td.serviceBead {
+! 	width:  12px;
+! 	padding: 0;
+  }
+  
+  img.serviceBeadImg {
+! 	width: 12px;
+! 	height: 12px;
+  }
+  
+  td.serviceName {
+! 	padding: 0;
+! 	color: white;
+! 	font-size: 12px;
+! 	text-align: left;
+! 	width: 88px;
+! 	padding-left: 1px;
+! 	text-shadow: 0px -1px 1px #000;
+! 
+  }
+  
+  td.serviceStatus {
+! 	padding: 0;
+! 	color: gray;
+! 	font-size: 10px;
+! 	text-align: left;
+! 	width: 94px;
+  }
+  
+  td.serviceLink {
+! 	padding: 0;
+! 	width: 14px;
+  }
+  
+- 
+  div.serviceLinkIcon {
+! 	position: relative;
+! 	padding: 2px;
+! 	width: 12px;
+! 	height: 12px;
+  }
+  
+  tr:hover div.serviceLinkIcon {
+! 	cursor: pointer;
+! 	content: url(Images/linkIcon.png);
+  }
+  
+  
+--- 452,528 ----
+  	   rendered and used for layout... otherwise the
+  	   view will jump about a bit when you mouse over the
+  	   first row (see tr + tr immediately below) */
+!     border-top-width: 1px;
+!     border-top-style: solid;
+!     border-top-color: rgba(0, 0, 0, 0);
+  }
+  
+  .servicesTable tr + tr td {
+  	/* slightly lighten the top of the row during normal drawing */
+!     border-top-width: 1px;
+!     border-top-style: solid;
+!     border-top-color: rgba(255, 255, 255, 0.0901961);
+  }
+  
+  .servicesTable tr:hover td {
+  	/* slightly darken the top of the row when hovering */
+!     border-top-width: 1px;
+!     border-top-style: solid;
+!     border-top-color: rgba(0, 0, 0, 0.0901961);
+  }
+  
+  .servicesTable td.gap {
+  	/* for the "gap" table columns, show no top border */
+!     width: 5px;
+!     border-top-width: 0px;
+!     border-top-style: initial;
+!     border-top-color: initial;
+!     padding: 0px;
+  }
+  
+  td.serviceBead {
+!     width: 12px;
+!     padding: 0px;
+  }
+  
+  img.serviceBeadImg {
+!     width: 12px;
+!     height: 12px;
+  }
+  
+  td.serviceName {
+!     padding: 0px;
+!     color: white;
+!     font-size: 12px;
+!     text-align: left;
+!     width: 88px;
+!     padding-left: 1px;
+!     text-shadow: rgb(0, 0, 0) 0px -1px 1px;
+  }
+  
+  td.serviceStatus {
+!     padding: 0px;
+!     color: gray;
+!     font-size: 10px;
+!     text-align: left;
+!     width: 94px;
+  }
+  
+  td.serviceLink {
+!     padding: 0px;
+!     width: 14px;
+  }
+  
+  div.serviceLinkIcon {
+!     position: relative;
+!     padding: 2px;
+!     width: 12px;
+!     height: 12px;
+  }
+  
+  tr:hover div.serviceLinkIcon {
+!     cursor: pointer;
+!     content: url(file:///var/folders/Xc/XcgDCxuCEk0YkEl-N+F9RE+++TM/-Tmp-/Dashcode/.ServerStats.dcprojslUokO/ServerStats.dcproj/project.wdgt/Images/linkIcon.png);
+  }
+  
+  
+***************
+*** 499,554 ****
+  /* @end */
+  
+  /* @group Back */
+- 
+  #back {
+! 	position: absolute;
+! 	top: 6px;
+! 	left: 10px;
+! 	bottom: 14px;
+! 	right: 10px;
+! 	border: 1px solid black;
+! 	-webkit-border-radius: 10px;
+! 	background: #343432 url(Images/backgroundGradient.png) no-repeat;
+! 	color: white;
+! 	clip: auto;
+! 	display: none;
+! 	font-size: 11px;
+  }
+  
+  #backContent {
+! 	position: absolute;
+! 	top: 20px;
+! 	bottom:  20px;
+! 	left: 20px;
+! 	right: 20px;
+  }
+  
+  .backLabel {
+! 	left:  0px;
+! 	position: relative;
+  }
+  
+! #back input
+! {
+! 	position: relative;
+! 	left: 0px;
+! 	width: 170px;
+  }
+  
+  #statusLabel {
+! 	position: absolute;
+! 	bottom: 7px;
+! 	width: 100px;
+! 	color: lightgrey;
+! 	font-size: 9px;
+  }
+  
+  #doneButton {
+! 	position: absolute;
+! 	bottom: 0px;
+! 	right: 0px;
+  }
+  
+  
+  
+! /* @end */
+\ No newline at end of file
+--- 533,622 ----
+  /* @end */
+  
+  /* @group Back */
+  #back {
+!     position: absolute;
+!     top: 6px;
+!     left: 10px;
+!     height: 100%;
+!     bottom: 0px;
+!     right: 10px;
+!     border-width: 1px;
+!     border-style: solid;
+!     border-color: black;
+!     -webkit-border-top-right-radius: 10px 10px;
+!     -webkit-border-top-left-radius: 10px 10px;
+!     -webkit-border-bottom-left-radius: 10px 10px;
+!     -webkit-border-bottom-right-radius: 10px 10px;
+!     background-image: url(Images/backgroundGradient.png);
+!     background-repeat: no-repeat;
+!     background-attachment: initial;
+!     -khtml-background-clip: initial;
+!     -khtml-background-origin: initial;
+!     background-color: rgb(52, 52, 50);
+!     color: white;
+!     clip: auto;
+!     display: none;
+!     font-size: 11px;
+  }
+  
+  #backContent {
+!     position: absolute;
+!     top: 10px;
+!     bottom: 10px;
+!     left: 20px;
+!     right: 20px;
+  }
+  
+  .backLabel {
+!     left: 0px;
+!     position: relative;
+  }
+  
+! #back input {
+!     position: relative;
+!     left: 0px;
+!     width: 170px;
+  }
+  
+  #statusLabel {
+!     position: absolute;
+!     bottom: 7px;
+!     width: 100px;
+!     color: rgb(211, 211, 211);
+!     font-size: 9px;
+  }
+  
+  #doneButton {
+!     position: absolute;
+!     bottom: 0px;
+!     right: 0px;
+  }
+  
+  
+  
+! /* @end */
+! .dropShadow {
+!     width: 240px;
+!     height: 160px;
+!     -khtml-margin-top-collapse: separate;
+!     -khtml-margin-bottom-collapse: separate;
+!     margin-top: 16px;
+! }
+! 
+! .Apple-style-span {
+!     position: relative;
+!     display: block;
+!     width: auto;
+!     margin-right: 240px;
+!     margin-left: 0px;
+!     min-height: 0px;
+!     height: auto;
+!     -khtml-margin-top-collapse: separate;
+!     -khtml-margin-bottom-collapse: separate;
+! }
+! 
+! #iChatServiceName {
+!     -khtml-margin-top-collapse: separate;
+!     -khtml-margin-bottom-collapse: separate;
+!     width: auto;
+! }
+diff -c orig/ServerStatus.html dest/ServerStatus.html
+*** orig/ServerStatus.html	2007-07-20 01:13:54.000000000 +0400
+--- dest/ServerStatus.html	2008-12-25 14:06:58.000000000 +0300
+***************
+*** 1,188 ****
+  <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+! 	<title>Server Status Widget</title>
+! 	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleAnimator.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleButton.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleInfoButton.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollArea.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollBar.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="FadeInOutNode.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="ObjCGlue.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="localizedStrings.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="localizedHealthStrings.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="ServerStatus.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="ServerStatusAuth.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="ServerStatusNetwork.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="ServerStatusGraphs.js" charset="utf-8"></script>
+! 	<script type="text/javascript" src="ServerStatusModel.js" charset="utf-8"></script>
+! 	<style type="text/css" title="AppleStyle">@import "ServerStatus.css";</style>
+  </head>
+- 
+  <body onload="setup();" onkeypress="keyPress(event);">
+! 
+! 	<div id="background">
+! 		<img class="dropShadow" src="Images/dropShadow.png" width="100%" height="100%/">
+! 	</div>
+! 
+! 	<div id="front">
+! 
+! 		<div id="title">
+! 			<div id="titleText">Not Connected</div>
+! 			<div id="resizeWidget" onclick="resizeWidgetClicked(event)" ;=""></div>
+! 			<div class="flip" id="flip"></div>
+! 		</div>
+! 
+! 		<div id="graphAndServicesContentArea" class="contentArea">
+! 			<div id="graphArea">
+! 
+! 				<div id="graphFadeInArea">
+! 					<div class="graphTimeScale" onclick="clickGraphFadeInArea(this)">
+! 						<span id="graphTimeScale1H" class="selectedTimeScale" onclick="setTimeScale(60 * 60)">1h</span>
+! 						<span id="graphTimeScale1D" class="regularTimeScale" onclick="setTimeScale(60 * 60 * 24)">1d</span>
+! 						<span id="graphTimeScale1W" class="regularTimeScale" onclick="setTimeScale(60 * 60 * 24 * 7)">1w</span>
+! 					</div>
+! 				</div>
+! 
+! 				<div id="cpuGraphArea">
+! 					<div id="cpuGraphTopLabel" class="graphTopLabel"></div>
+! 					<canvas id="cpuGraphCanvas" class="graphCanvas" width="176" height="58"></canvas>
+! 
+! 					<div id="cpuGraph0Label" class="graphYAxisLabel">0</div>
+! 					<div id="cpuGraph50Label" class="graphYAxisLabel">50</div>
+! 					<div id="cpuGraph100Label" class="graphYAxisLabel">100</div>
+! 				</div>
+! 
+! 				<div id="networkGraphArea">
+! 					<div id="networkGraphTopLabel" class="graphTopLabel"></div>
+! 					<canvas id="networkGraphCanvas" class="graphCanvas" width="176" height="58"></canvas>
+! 
+! 					<div id="networkGraphInLabel" class="graphYAxisLabel">in</div>
+! 					<div id="networkGraphOutLabel" class="graphYAxisLabel">out</div>
+! 				</div>
+! 
+! 				<div id="diskGraphArea">
+! 					<div id="diskGraphTopLabel" class="graphTopLabel"></div>
+! 					<canvas id="diskGraphCanvas" class="graphCanvas" width="176" height="58"></canvas>
+! 
+! 					<div id="diskGraphShowOnMouseOver">
+! 						<div id="diskGraphAmountUsedLabel"></div>
+! 						<div id="diskGraphAmountFreeLabel"></div>
+! 					</div>
+! 				</div>
+! 
+! 			</div>
+! 
+! 			<div id="graphButtonArea">
+! 				<img class="graphButtonsHashMark" id="hash1" src="Images/buttonHashmark.png">
+! 				<div class="graphButton" id="graphCPUButton" onclick="clickGraphCPUButton(this)">
+! 					<img class="graphButtonBg" id="cpuBg" src="Images/buttonSelectedBg.png">
+! 					<div class="graphButtonImage" id="cpuButtonImage"></div>
+! 					<div class="graphButtonBead" id="cpuButtonBead"></div>
+! 				</div>
+! 				<img class="graphButtonsHashMark" id="hash2" src="Images/buttonHashmark.png">
+! 				<div class="graphButton" id="graphNetworkButton" onclick="clickGraphNetworkButton(this)">
+! 					<img class="graphButtonBg" id="networkBg" src="Images/buttonSelectedBg.png">
+! 					<div class="graphButtonImage" id="networkButtonImage"></div>
+! 					<div class="graphButtonBead" id="networkButtonBead"></div>
+! 				</div>
+! 				<img class="graphButtonsHashMark" id="hash3" src="Images/buttonHashmark.png">
+! 				<div class="graphButton" id="graphDiskButton" onclick="clickGraphDiskButton(this)">
+! 					<img class="graphButtonBg" id="diskBg" src="Images/buttonSelectedBg.png">
+! 					<div class="graphButtonImage" id="diskButtonImage"></div>
+! 					<div class="graphButtonBead" id="diskButtonBead"></div>
+! 				</div>
+! 				<img class="graphButtonsHashMark" id="hash4" src="Images/buttonHashmark.png">
+! 			</div>
+! 
+! 			<div id="servicesArea">
+! 				<div id="services">
+! 					<table cellspacing="0" class="servicesTable">
+! 						<tbody>
+! 							<tr id="sharingServiceRow" class="normalRow">
+! 								<td class="gap"></td>
+! 								<td class="serviceBead">
+! 									<img class="serviceBeadImg" src="Images/GreenBead.tiff">
+! 								</td>
+! 								<td id="fileSharingServiceName" class="serviceName">File Sharing</td>
+! 								<td class="serviceStatus">-</td>
+! 								<td class="serviceLink"><div class="serviceLinkIcon" onclick="clickServiceItem(this.parentNode.parentNode);"/></td>
+! 								<td class="gap"></td>
+! 							</tr>
+! 							<tr id="calendarServiceRow" class="normalRow">
+! 								<td class="gap"></td>
+! 								<td class="serviceBead">
+! 									<img class="serviceBeadImg" src="Images/GreenBead.tiff">
+! 								</td>
+! 								<td id="iCalServiceName" class="serviceName">iCal</td>
+! 								<td class="serviceStatus">-</td>
+! 								<td class="serviceLink"><div class="serviceLinkIcon" onclick="clickServiceItem(this.parentNode.parentNode);"/></td>
+! 								<td class="gap"></td>
+! 							</tr>
+! 							<tr id="chatServiceRow" class="normalRow">
+! 								<td class="gap"></td>
+! 								<td class="serviceBead">
+! 									<img class="serviceBeadImg" src="Images/GreenBead.tiff">
+! 								</td>
+! 								<td id="iChatServiceName" class="serviceName">iChat</td>
+! 								<td class="serviceStatus">-</td>
+! 								<td class="serviceLink"><div class="serviceLinkIcon" onclick="clickServiceItem(this.parentNode.parentNode);"/></td>
+! 								<td class="gap"></td>
+! 							</tr>
+! 							<tr id="mailServiceRow" class="normalRow">
+! 								<td class="gap"></td>
+! 								<td class="serviceBead">
+! 									<img class="serviceBeadImg" src="Images/GreenBead.tiff">
+! 								</td>
+! 								<td id="mailServiceName" class="serviceName">Mail</td>
+! 								<td class="serviceStatus">-</td>
+! 								<td class="serviceLink"><div class="serviceLinkIcon" onclick="clickServiceItem(this.parentNode.parentNode);"/></td>
+! 								<td class="gap"></td>
+! 							</tr>
+! 							<tr id="webServiceRow" class="normalRow">
+! 								<td class="gap"></td>
+! 								<td class="serviceBead">
+! 									<img class="serviceBeadImg" src="Images/GreenBead.tiff">
+! 								</td>
+! 								<td id="webServiceName" class="serviceName">Web</td>
+! 								<td class="serviceStatus">-</td>
+! 								<td class="serviceLink"><div class="serviceLinkIcon" onclick="clickServiceItem(this.parentNode.parentNode);"/></td>
+! 								<td class="gap"></td>
+! 							</tr>
+! 							<tr id="vpnServiceRow" class="normalRow">
+! 								<td class="gap"></td>
+! 								<td class="serviceBead">
+! 									<img class="serviceBeadImg" src="Images/GreenBead.tiff">
+! 								</td>
+! 								<td id="vpnServiceName" class="serviceName">VPN</td>
+! 								<td class="serviceStatus">-</td>
+! 								<td class="serviceLink"><div class="serviceLinkIcon" onclick="clickServiceItem(this.parentNode.parentNode);"/></td>
+! 								<td class="gap"></td>
+! 							</tr>
+! 						</tbody>
+! 					</table>
+! 				</div>
+! 			</div>
+! 		</div>
+! 	</div>
+! 
+! 	<div id="back">
+! 
+! 		<div id="backContent">
+! 			<div id="serverLabel" class="backLabel">Server:</div>
+! 			<input id="serverInput" value="" oninput="serverInput(event);">
+! 
+! 			<div id="userLabel" class="backLabel">User Name:</div>
+! 			<input id="userInput" value="" oninput="userInput(event);">
+! 
+! 			<div id="passwordLabel" class="backLabel">Password:</div>
+! 			<input id="passwordInput" value="" type="password" oninput="passwordInput(event);">
+! 
+! 			<div id="statusLabel"></div>
+! 
+! 			<div id="doneButton"></div>
+! 		</div>
+! 	</div>
+! 
+  </body>
+! </html>
+\ No newline at end of file
+--- 1,172 ----
+  <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+!     <title>Server Status Widget</title>
+!     <script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleAnimator.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleButton.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleInfoButton.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollArea.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="file:///System/Library/WidgetResources/AppleClasses/AppleScrollBar.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="base64.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="jquery.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="jquery.json-1.3.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="FadeInOutNode.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="ObjCGlue.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="localizedStrings.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="localizedHealthStrings.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="ServerStatus.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="ServerStatusAuth.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="ServerStatusNetwork.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="ServerStatusGraphs.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="ServerStatusModel.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="ServerStatsAgent.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="Parts/Text.js" charset="utf-8"></script>
+!     <script type="text/javascript" src="Parts/utilities.js" charset="utf-8"></script>
+!     <style type="text/css" title="AppleStyle">@import "ServerStatus.css";</style>
+!     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body onload="setup();" onkeypress="keyPress(event);">
+!     <div id="background">
+!         <img class="dropShadow" src="Images/dropShadow.png" width="100%" height="100%/">
+!     <div id="front">
+!         <div id="title">
+!             <div id="titleText">Not Connected</div>
+!             <div id="resizeWidget" onclick="resizeWidgetClicked(event)" ;=""></div>
+!             <div class="flip" id="flip"></div>
+!         </div>
+!         <div id="graphAndServicesContentArea" class="contentArea">
+!             <div id="graphArea">
+!                 <div id="graphFadeInArea">
+!                     <div class="graphTimeScale" onclick="clickGraphFadeInArea(this)">
+!                         <span id="graphTimeScale1H" class="selectedTimeScale" onclick="setTimeScale(60 * 60)">1h</span>
+!                         <span id="graphTimeScale1D" class="regularTimeScale" onclick="setTimeScale(60 * 60 * 24)">1d</span>
+!                         <span id="graphTimeScale1W" class="regularTimeScale" onclick="setTimeScale(60 * 60 * 24 * 7)">1w</span>
+!                     </div>
+!                 </div>
+!                 <div id="cpuGraphArea">
+!                     <div id="cpuGraphTopLabel" class="graphTopLabel"></div>
+!                     <canvas id="cpuGraphCanvas" class="graphCanvas" width="176" height="58"></canvas>
+!                     <div id="cpuGraph0Label" class="graphYAxisLabel">0</div>
+!                     <div id="cpuGraph50Label" class="graphYAxisLabel">50</div>
+!                     <div id="cpuGraph100Label" class="graphYAxisLabel">100</div>
+!                 </div>
+!                 <div id="networkGraphArea">
+!                     <div id="networkGraphTopLabel" class="graphTopLabel"></div>
+!                     <canvas id="networkGraphCanvas" class="graphCanvas" width="176" height="58"></canvas>
+!                     <div id="networkGraphInLabel" class="graphYAxisLabel">in</div>
+!                     <div id="networkGraphOutLabel" class="graphYAxisLabel">out</div>
+!                 </div>
+!                 <div id="diskGraphArea">
+!                     <div id="diskGraphTopLabel" class="graphTopLabel"></div>
+!                     <canvas id="diskGraphCanvas" class="graphCanvas" width="176" height="58"></canvas>
+!                     <div id="diskGraphShowOnMouseOver">
+!                         <div id="diskGraphAmountUsedLabel"></div>
+!                         <div id="diskGraphAmountFreeLabel"></div>
+!                     </div>
+!                 </div>
+!             </div>
+!             <div id="graphButtonArea">
+!                 <img class="graphButtonsHashMark" id="hash1" src="Images/buttonHashmark.png">
+!                 <div class="graphButton" id="graphCPUButton" onclick="clickGraphCPUButton(this)">
+!                     <img class="graphButtonBg" id="cpuBg" src="Images/buttonSelectedBg.png">
+!                     <div class="graphButtonImage" id="cpuButtonImage"></div>
+!                     <div class="graphButtonBead" id="cpuButtonBead"></div>
+!                 </div>
+!                 <img class="graphButtonsHashMark" id="hash2" src="Images/buttonHashmark.png">
+!                 <div class="graphButton" id="graphNetworkButton" onclick="clickGraphNetworkButton(this)">
+!                     <img class="graphButtonBg" id="networkBg" src="Images/buttonSelectedBg.png">
+!                     <div class="graphButtonImage" id="networkButtonImage"></div>
+!                     <div class="graphButtonBead" id="networkButtonBead"></div>
+!                 </div>
+!                 <img class="graphButtonsHashMark" id="hash3" src="Images/buttonHashmark.png">
+!                 <div class="graphButton" id="graphDiskButton" onclick="clickGraphDiskButton(this)">
+!                     <img class="graphButtonBg" id="diskBg" src="Images/buttonSelectedBg.png">
+!                     <div class="graphButtonImage" id="diskButtonImage"></div>
+!                     <div class="graphButtonBead" id="diskButtonBead"></div>
+!                 </div>
+!                 <img class="graphButtonsHashMark" id="hash4" src="Images/buttonHashmark.png">
+!             </div>
+!             <div id="servicesArea" style="display:none">
+!                 <div id="services">
+!                     <table cellspacing="0" class="servicesTable">
+!                         <tbody>
+!                             <tr id="sharingServiceRow" class="normalRow">
+!                                 <td class="gap"></td>
+!                                 <td class="serviceBead">
+!                                     <img class="serviceBeadImg" src="Images/GreenBead.tiff">
+!                                 </td>
+!                                 <td id="fileSharingServiceName" class="serviceName">File Sharing</td>
+!                                 <td class="serviceStatus">-</td>
+!                                 <td class="serviceLink"><div class="serviceLinkIcon" onclick="clickServiceItem(this.parentNode.parentNode);"></div></td>
+!                                 <td class="gap"></td>
+!                             </tr>
+!                             <tr id="calendarServiceRow" class="normalRow">
+!                                 <td class="gap"></td>
+!                                 <td class="serviceBead">
+!                                     <img class="serviceBeadImg" src="Images/GreenBead.tiff">
+!                                 </td>
+!                                 <td id="iCalServiceName" class="serviceName">iCal</td>
+!                                 <td class="serviceStatus">-</td>
+!                                 <td class="serviceLink"><div class="serviceLinkIcon" onclick="clickServiceItem(this.parentNode.parentNode);"></div></td>
+!                                 <td class="gap"></td>
+!                             </tr>
+!                             <tr id="chatServiceRow" class="normalRow">
+!                                 <td class="gap"></td>
+!                                 <td class="serviceBead">
+!                                     <img class="serviceBeadImg" src="Images/GreenBead.tiff">
+!                                 </td>
+!                                 <td id="iChatServiceName" class="serviceName">iChat</td>
+!                                 <td class="serviceStatus">-</td>
+!                                 <td class="serviceLink"><div class="serviceLinkIcon" onclick="clickServiceItem(this.parentNode.parentNode);"></div></td>
+!                                 <td class="gap"></td>
+!                             </tr>
+!                             <tr id="mailServiceRow" class="normalRow">
+!                                 <td class="gap"></td>
+!                                 <td class="serviceBead">
+!                                     <img class="serviceBeadImg" src="Images/GreenBead.tiff">
+!                                 </td>
+!                                 <td id="mailServiceName" class="serviceName">Mail</td>
+!                                 <td class="serviceStatus">-</td>
+!                                 <td class="serviceLink"><div class="serviceLinkIcon" onclick="clickServiceItem(this.parentNode.parentNode);"></div></td>
+!                                 <td class="gap"></td>
+!                             </tr>
+!                             <tr id="webServiceRow" class="normalRow">
+!                                 <td class="gap"></td>
+!                                 <td class="serviceBead">
+!                                     <img class="serviceBeadImg" src="Images/GreenBead.tiff">
+!                                 </td>
+!                                 <td id="webServiceName" class="serviceName">Web</td>
+!                                 <td class="serviceStatus">-</td>
+!                                 <td class="serviceLink"><div class="serviceLinkIcon" onclick="clickServiceItem(this.parentNode.parentNode);"></div></td>
+!                                 <td class="gap"></td>
+!                             </tr>
+!                             <tr id="vpnServiceRow" class="normalRow">
+!                                 <td class="gap"></td>
+!                                 <td class="serviceBead">
+!                                     <img class="serviceBeadImg" src="Images/GreenBead.tiff">
+!                                 </td>
+!                                 <td id="vpnServiceName" class="serviceName">VPN</td>
+!                                 <td class="serviceStatus">-</td>
+!                                 <td class="serviceLink"><div class="serviceLinkIcon" onclick="clickServiceItem(this.parentNode.parentNode);"></div></td>
+!                                 <td class="gap"></td>
+!                             </tr>
+!                         </tbody>
+!                     </table>
+!                 </div>
+!             </div>
+!         </div>
+!     </div>
+!     <div id="back">
+!         <div id="backContent">
+!             <div id="serverLabel" class="backLabel">Server:</div>
+!             <input id="serverInput" value="" oninput="serverInput(event);">
+!             <div id="userLabel" class="backLabel">User Name:</div>
+!             <input id="userInput" value="" oninput="userInput(event);">
+!             <div id="passwordLabel" class="backLabel">Password:</div>
+!             <input id="passwordInput" value="" type="password" oninput="passwordInput(event);">
+!             <div id="statusLabel"></div>
+!             <div id="doneButton"></div>
+!         </div>
+!     </div>
+  </body>
+! </html>
+diff -c orig/ServerStatusAuth.js dest/ServerStatusAuth.js
+*** orig/ServerStatusAuth.js	2007-04-19 01:56:50.000000000 +0400
+--- dest/ServerStatusAuth.js	2008-12-25 14:06:58.000000000 +0300
+***************
+*** 100,107 ****
+  	
+  	// if we're running locally on a server, and there isn't a
+  	// hostname or username defined, fill in the defaults with the local server
+! 	if(hostname == undefined && username == undefined && XSAdminSessionPlugIn.localMachineIsServer) {
+! 		hostname = XSAdminSessionPlugIn.defaultHostName;
+  		username = XSAdminSessionPlugIn.defaultUserName;
+  	}
+  }
+--- 100,107 ----
+  	
+  	// if we're running locally on a server, and there isn't a
+  	// hostname or username defined, fill in the defaults with the local server
+! 	if(hostname == undefined && username == undefined /*&& XSAdminSessionPlugIn.localMachineIsServer*/) {
+! 		hostname = XSAdminSessionPlugIn.defaultHostName + ':8018';
+  		username = XSAdminSessionPlugIn.defaultUserName;
+  	}
+  }
+***************
+*** 125,136 ****
+  {
+  	var statusLabel = document.getElementById('statusLabel');
+  
+! 	if(hostname && username && password) {
+  		alert("Connecting to server...");
+  		statusLabel.innerText = localizedStrings["Connecting..."];
+! 		
+  		authenticated = false;
+! 		XSAdminSessionPlugIn.initializeSessionForServer(hostname, username, password, "handleAuthResponse");		
+  	}
+  	else {
+  		if(!hostname)
+--- 125,149 ----
+  {
+  	var statusLabel = document.getElementById('statusLabel');
+  
+! 	if(hostname /*&& username && password*/) {
+  		alert("Connecting to server...");
+  		statusLabel.innerText = localizedStrings["Connecting..."];
+! 
+!     $.ajax({ 
+!       url: "http://" + hostname + '/ping',
+!     	type: 'GET',
+!     	beforeSend: function(req) {
+!     	  if (username)
+!     	    req.setRequestHeader('Authorization', "Basic " + Base64.encode(username+':'+password));
+!     	},
+!     	success: function(data, textStatus) {
+!     	  if (data.match(/pong/))
+!     	    authSuccess();
+!     	} 
+!     });
+!     	  		
+  		authenticated = false;
+! 		//XSAdminSessionPlugIn.initializeSessionForServer(hostname, username, password, "handleAuthResponse");		
+  	}
+  	else {
+  		if(!hostname)
+***************
+*** 167,172 ****
+--- 180,188 ----
+  	statusLabel.innerText = localizedStrings["Connected"];
+  
+  	saveAuthCredentialsToPrefs();
++ 
++ 	if (model)
++ 	  model.hostname = hostname.replace(/^http:\/\//, '').replace(/:\d+$/, '');
+  	
+  	if(showingBack)
+  		flipToFront();
+diff -c orig/ServerStatusGraphs.js dest/ServerStatusGraphs.js
+*** orig/ServerStatusGraphs.js	2007-08-14 01:53:08.000000000 +0400
+--- dest/ServerStatusGraphs.js	2008-12-25 14:06:58.000000000 +0300
+***************
+*** 363,368 ****
+--- 363,369 ----
+  	
+  	// model.graphData is an ordered array with newest (hightest t) first
+  	var samples = model.graphData;
++ 	alert('model.graphData: ' + model.graphData)
+  	var timeScale = model.graphTimeScale;
+  	var matchingSamples = [];
+  	var minMaxValues = {};
+diff -c orig/ServerStatusModel.js dest/ServerStatusModel.js
+*** orig/ServerStatusModel.js	2007-07-20 01:13:54.000000000 +0400
+--- dest/ServerStatusModel.js	2008-12-25 14:06:58.000000000 +0300
+***************
+*** 5,11 ****
+  function resetModel()
+  {
+  	var defaultModel = {
+! 		"hostname"					: localizedStrings["Not Connected"],
+  		"isStandardConfig"			: 0,
+  		"isWorkgroupConfig"			: 0,
+  		"selectedGraph"				: kCPUGraphIdentifier,
+--- 5,11 ----
+  function resetModel()
+  {
+  	var defaultModel = {
+! 		"hostname"					  : localizedStrings["Not Connected"],
+  		"isStandardConfig"			: 0,
+  		"isWorkgroupConfig"			: 0,
+  		"selectedGraph"				: kCPUGraphIdentifier,
+diff -c orig/ServerStatusNetwork.js dest/ServerStatusNetwork.js
+*** orig/ServerStatusNetwork.js	2007-07-17 04:40:41.000000000 +0400
+--- dest/ServerStatusNetwork.js	2008-12-25 14:06:58.000000000 +0300
+***************
+*** 81,87 ****
+  	if(payload != undefined) {
+  		lastGraphRefreshDate = new Date();
+  		var requestInObjC = convertObjectToObjC(payload, XSAdminSessionPlugIn);
+! 		XSAdminSessionPlugIn.sendRequest(requestInObjC, 'servermgr_info', 'finishedGraphsBatchRequest');
+  	}
+  }
+  
+--- 81,88 ----
+  	if(payload != undefined) {
+  		lastGraphRefreshDate = new Date();
+  		var requestInObjC = convertObjectToObjC(payload, XSAdminSessionPlugIn);
+! 		//XSAdminSessionPlugIn.sendRequest(requestInObjC, 'servermgr_info', 'finishedGraphsBatchRequest');
+! 		ServerStatsAgent.sendRequest(payload, 'servermgr_info', finishedGraphsBatchRequest);
+  	}
+  }
+  
+***************
+*** 90,101 ****
+  	lastStateRefreshDate = new Date();
+  
+  	var requestInObjC = convertObjectToObjC(refreshStatePayload, XSAdminSessionPlugIn);
+! 	XSAdminSessionPlugIn.sendRequest(requestInObjC, 'servermgr_info', 'finishedServicesBatchRequest');
+  }
+  
+  
+! function finishedGraphsBatchRequest(response)
+  {
+  	if(response != undefined) {
+  		if (response.command == 'batchRequest') {
+  			if(debugLogging) { alert("batchRequest for graphs returned"); }
+--- 91,107 ----
+  	lastStateRefreshDate = new Date();
+  
+  	var requestInObjC = convertObjectToObjC(refreshStatePayload, XSAdminSessionPlugIn);
+! 	//XSAdminSessionPlugIn.sendRequest(requestInObjC, 'servermgr_info', 'finishedServicesBatchRequest');
+! 	ServerStatsAgent.sendRequest(refreshStatePayload, 'servermgr_info', finishedServicesBatchRequest)
+  }
+  
+  
+! function finishedGraphsBatchRequest(response, textStatus)
+  {
++     alert(response);
++     if (!response)  return;
++     response = $.evalJSON(response);
++ 
+  	if(response != undefined) {
+  		if (response.command == 'batchRequest') {
+  			if(debugLogging) { alert("batchRequest for graphs returned"); }
+***************
+*** 115,122 ****
+  	updateGraphs();
+  }
+  
+! function finishedServicesBatchRequest(response)
+  {
+  	if(response != undefined) {
+  		if (response.command == 'batchRequest') {
+  			if(debugLogging) { alert("batchRequest for services returned"); }
+--- 121,131 ----
+  	updateGraphs();
+  }
+  
+! function finishedServicesBatchRequest(response, textStatus)
+  {
++     alert(response);
++     if (!response)  return;
++     response = $.evalJSON(response);
+  	if(response != undefined) {
+  		if (response.command == 'batchRequest') {
+  			if(debugLogging) { alert("batchRequest for services returned"); }
+Common subdirectories: orig/XSAdminSessionPlugIn.widgetplugin and dest/XSAdminSessionPlugIn.widgetplugin
+Only in dest/: base64.js
+Only in dest/: jquery.js
+Only in dest/: jquery.json-1.3.js
